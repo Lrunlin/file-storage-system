@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "ts-node": {
+    "esm": true
+  },
+  "compilerOptions": {
+    "module": "ESNext", // 使用 ESM 模块
+    "outDir": "dist/esm" // 输出到 dist/esm 目录
+  }
+}

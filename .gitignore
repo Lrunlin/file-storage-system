@@ -1,0 +1,14 @@
+node_modules
+dist
+.next
+.idea
+.vscode
+.DS_Store
+*.local
+
+server/**/.env.development
+server/**/.env.production
+server/log
+server/blog_server
+
+client/env/.env.production

@@ -1,0 +1,78 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NEXT_PUBLIC_ISDEV=true next dev -p 6688 --turbopack",
+    "build": "cross-env NEXT_PUBLIC_ISPRO=true next build",
+    "start": "cross-env NEXT_PUBLIC_ISPRO=true next start -p 6688",
+    "build:output": "cross-env NEXT_PUBLIC_ISPRO=true output=true next build && node ./scripts/build-output/index.js",
+    "start:output": "nodemon",
+    "test": "cross-env NEXT_PUBLIC_ISDEV=true next build &&cross-env NEXT_PUBLIC_ISDEV=true next start -p 6688",
+    "analyze": "cross-env ANALYZE=true next build"
+  },
+  "dependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
+    "antd": "5.24.1",
+    "axios": "^1.7.9",
+    "classnames": "^2.3.1",
+    "cross-env": "^7.0.3",
+    "dayjs": "^1.11.5",
+    "echarts": "5.6.0",
+    "express": "^4.21.2",
+    "fast-glob": "^3.3.3",
+    "ioredis": "^5.4.2",
+    "js-cookie": "^3.0.1",
+    "next": "15.1.7",
+    "qs": "^6.13.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-easy-crop": "5.2.0",
+    "react-highlight-words": "0.21.0",
+    "react-infinite-scroll-component": "^6.1.0",
+    "sharp": "^0.33.4",
+    "swiper": "^11.2.1",
+    "use-animate-number": "1.0.5",
+    "zustand": "5.0.3"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "15.1.4",
+    "@styled-jsx/plugin-sass": "^4.1.1",
+    "@trivago/prettier-plugin-sort-imports": "5.2.1",
+    "@types/cookie": "^1.0.0",
+    "@types/express": "^5.0.0",
+    "@types/js-cookie": "^3.0.2",
+    "@types/node": "22.10.5",
+    "@types/qs": "^6.9.7",
+    "@types/react": "19.0.5",
+    "@types/react-dom": "19.0.3",
+    "@types/react-highlight-words": "^0.20.0",
+    "autoprefixer": "^10.4.7",
+    "babel-plugin-import": "^1.13.5",
+    "babel-plugin-react-compiler": "^19.0.0-beta-df7b47d-20241124",
+    "cssnano": "^7.0.6",
+    "dotenv": "^16.4.7",
+    "eslint": "9.18.0",
+    "eslint-config-next": "^15.1.4",
+    "glob": "^11.0.1",
+    "md5": "^2.3.0",
+    "postcss": "^8.4.49",
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.9",
+    "sass": "1.83.1",
+    "tailwind-scrollbar": "^3.0.4",
+    "tailwindcss": "3.4.17",
+    "ts-node": "^10.9.1",
+    "typescript": "5.7.3"
+  },
+  "overrides": {
+    "@emoji-mart/react": {
+      "react": "19.0.0",
+      "react-dom": "19.0.0"
+    },
+    "wangeditor-for-react": {
+      "react": "19.0.0",
+      "react-dom": "19.0.0"
+    }
+  }
+}

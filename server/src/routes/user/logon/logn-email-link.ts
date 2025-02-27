@@ -1,0 +1,80 @@
+import Router from "@koa/router";
+import DB from "@/db";
+import Identicon from "identicon.js";
+import Joi from "joi";
+import qs from "qs";
+import sha1 from "sha1";
+import validator from "@/common/middleware/verify/validator";
+import { getUserData, hasKey, removeKey } from "@/common/modules/cache/email";
+import sign from "@/common/utils/auth/sign";
+import id from "@/common/utils/id";
+
+let router = new Router();
+
+const schema = Joi.object({
+  key: Joi.string().length(40).required().error(new Error("Key的格式错误")),
+});
+
+router.get("/logon/email", validator(schema), async (ctx) => {
+  function response(
+    success: boolean,
+    title: string,
+    message?: string | string[],
+    token?: string,
+  ) {
+    let query = qs.stringify(
+      {
+        success,
+        title,
+        message,
+        href: "/",
+        token,
+      },
+      {
+        arrayFormat: "repeat", //query中的数组中不携带索引值
+      },
+    );
+    ctx.status = 302;
+    ctx.redirect(`${process.env.CLIENT_HOST}/result?${query}`);
+  }
+
+  let key = ctx.query.key as string;
+
+  // 携带了key但是缓存中没有找到
+  if (!(await hasKey(key))) {
+    response(false, "您的链接错误", [
+      "链接有效期15分钟请返回注册窗口重新发送链接",
+      "链接在注册成功后会直接销毁",
+    ]);
+    return;
+  }
+
+  let userData = await getUserData(key);
+  if (!userData) return false;
+  let _id = id();
+
+  let logonResulte = await DB.User.create({
+    id: _id,
+    email: userData.email,
+    name: userData?.name,
+    password: userData.password,
+    description: "",
+    auth: 0,
+    create_time: new Date(),
+  })
+    .then(() => true)
+    .catch(() => false);
+
+  if (!logonResulte) {
+    response(false, `注册失败`, "服务器注册错误");
+    return;
+  }
+
+  let token = await sign({
+    id: _id,
+    auth: 0,
+  });
+  response(true, "注册成功", "", token);
+  removeKey(key);
+});
+export default router;

@@ -1,0 +1,30 @@
+User-agent: *
+Allow:*
+# 文章修改和发布
+Disallow:/article/editor
+# 开发者中心
+Disallow:/creator
+# 文章搜索
+Disallow:/search
+# 用户信息
+Disallow:/user
+# 消息提示
+Disallow:/notification
+# oauth登录重定向
+Disallow:/oauth
+# 部分链接的结果展示
+Disallow:/result
+# 友链页面
+Disallow:/friendly-link
+#中转页面
+Disallow:/link
+# 提问
+Disallow:/problem/editor
+# 收藏页面
+Disallow:/collection
+# 管理员
+Disallow:/admin
+# 找回密码
+Disallow:/forget-password
+
+Sitemap:https://blogweb.cn/sitemap/index.xml
